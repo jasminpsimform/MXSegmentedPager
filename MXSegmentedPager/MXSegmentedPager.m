@@ -105,7 +105,13 @@
 - (void)layoutContentView {
     CGRect frame = self.bounds;
     
-    frame.origin = CGPointZero;
+    if (@available(iOS 11.0, *)) {
+        frame = self.safeAreaLayoutGuide.layoutFrame;
+    } else {
+        frame = self.layoutMarginsGuide.layoutFrame;
+    }
+    
+    //frame.origin = CGPointZero;
     self.contentView.frame = frame;
     self.contentView.contentSize = self.contentView.frame.size;
     self.contentView.scrollEnabled = !!self.contentView.parallaxHeader.view;
@@ -114,7 +120,11 @@
 
 - (void)layoutSegmentedControl {
     CGRect frame = self.bounds;
-    
+    if (@available(iOS 11.0, *)) {
+        frame = self.safeAreaLayoutGuide.layoutFrame;
+    } else {
+        frame = self.layoutMarginsGuide.layoutFrame;
+    }
     frame.origin.x = self.segmentedControlEdgeInsets.left;
     
     if (self.segmentedControlPosition == MXSegmentedControlPositionBottom) {
@@ -136,7 +146,11 @@
 
 - (void)layoutPager {
     CGRect frame = self.bounds;
-    
+    if (@available(iOS 11.0, *)) {
+        frame = self.safeAreaLayoutGuide.layoutFrame;
+    } else {
+        frame = self.layoutMarginsGuide.layoutFrame;
+    }
     frame.origin = CGPointZero;
     
     if (self.segmentedControlPosition == MXSegmentedControlPositionTop) {
