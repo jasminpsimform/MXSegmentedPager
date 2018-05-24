@@ -23,7 +23,7 @@
 #import "MXSegmentedPagerController.h"
 
 @interface MXSegmentedPagerController () <MXPageSegueSource>
-@property (nonatomic, strong) NSMutableDictionary<NSNumber *, UIViewController *> *pageViewControllers;
+
 @end
 
 @implementation MXSegmentedPagerController {
@@ -77,7 +77,7 @@
 }
 
 - (UIViewController *)segmentedPager:(MXSegmentedPager *)segmentedPager viewControllerForPageAtIndex:(NSInteger)index {
-    UIViewController *pageViewController = self.pageViewControllers[@(index)];
+   __weak UIViewController *pageViewController = self.pageViewControllers[@(index)];
     
     if (!pageViewController && self.storyboard) {
         NSString *identifier = [self segmentedPager:segmentedPager segueIdentifierForPageAtIndex:index];
@@ -98,6 +98,12 @@
     return [NSString stringWithFormat:MXSeguePageIdentifierFormat, (long)index];
 }
 
+-(void)segmentedPager:(MXSegmentedPager *)segmentedPager didEndDisplayingPage:(UIView *)page atIndex:(NSInteger)index {
+    UIViewController * vc  = [self.pageViewControllers objectForKey:@(index)];
+    [vc removeFromParentViewController];
+    [self.pageViewControllers removeObjectForKey:@(index)];
+    
+}
 #pragma mark <MXPageSegueSource>
 
 - (NSInteger)pageIndex {

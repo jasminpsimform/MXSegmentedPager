@@ -62,6 +62,9 @@ NS_ASSUME_NONNULL_BEGIN
  Returns the segmengted-pager view managed by the controller object.
  */
 @property (nonatomic, strong, readonly) MXSegmentedPager *segmentedPager;
+@property (nonatomic, strong) NSMutableDictionary<NSNumber *, UIViewController *> *pageViewControllers;
+
+//- (NSMutableDictionary<NSNumber *,UIViewController *> *)pageViewControllers;
 
 @end
 
