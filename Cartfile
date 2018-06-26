@@ -1,3 +1,3 @@
 github "maxep/MXPagerView" "0.2.1"
 github "maxep/MXParallaxHeader" "0.6.1"
-git "https://github.com/jatin19121990/HMSegmentedControl.git” "master"
+git “jatin19121990/MXSegmentedPager” “master”
